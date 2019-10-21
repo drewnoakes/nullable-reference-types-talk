@@ -6,12 +6,14 @@ public class DodgyCoin
 
     public string Flip()
     {
-        return _random.Next(1000) switch
-        {
-            var i when i > 500 => "Heads",
-            var i when i > 0   => "Tails",
-            _ => null
-        };
+        var i = _random.Next(1000);
+
+        if (i > 500)
+            return "Heads";
+        else if (i > 0)
+            return "Tails";
+        else
+            return null;
     }
 }
 
@@ -27,12 +29,12 @@ public class TwoUp
         var isHeads1 = _coin1.Flip().Equals("Heads");
         var isHeads2 = _coin2.Flip().Equals("Heads");
 
-        return (isHeads1, isHeads2) switch
+        switch ((isHeads1, isHeads2))
         {
-            (true,  true)  => "Win",
-            (false, false) => "Lose",
-            (_,     _)     => "Try again"
-        };
+            case (true, true): return "Win";
+            case (false, false): return "Lose";
+            default: return "Try again";
+        }
     }
 }
 
